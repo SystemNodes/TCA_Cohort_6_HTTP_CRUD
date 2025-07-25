@@ -1,0 +1,26 @@
+[
+ {
+  "id": 1,
+  "name": "Patrick Njoku",
+  "stack": "Backend",
+  "gender": "male"
+ },
+ {
+  "id": 2,
+  "name": "Amanze Njoku",
+  "stack": "Backend",
+  "gender": "male"
+ },
+ {
+  "name": "John Njoku",
+  "stack": "Backend",
+  "gender": "male",
+  "id": 3
+ },
+ {
+  "name": "Charles Njoku",
+  "stack": "Backend",
+  "gender": "male",
+  "id": 4
+ }
+]
