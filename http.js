@@ -14,7 +14,7 @@ const writeData = (data)=>{
 }
 
 const server = http.createServer((request, response)=>{
-    // Create Student
+    //Create Student
     if (request.method === 'POST' && request.url === '/create-student') {
         let body = '';
 
@@ -31,7 +31,7 @@ const server = http.createServer((request, response)=>{
             response.end('Student Created Successfully')
         })
      
-    // Get all student    
+    //Get all student    
     } else if (request.url === '/all-students' && request.method == 'GET') {
         response.writeHead(200, { 'Content-Type': 'application/json' })
         const data = JSON.stringify({
@@ -40,7 +40,7 @@ const server = http.createServer((request, response)=>{
         })
         response.end(data)
 
-    // Get a single student
+    //Get a single student
     }else if (request.method === 'GET' && request.url.startsWith('/student')) {
         const url = request.url
         const id = parseInt(url.split('/')[2]);
@@ -58,7 +58,7 @@ const server = http.createServer((request, response)=>{
             }))
         }
 
-    // Update student
+    //Update student
     }else if (request.url.startsWith('/student') && request.method === 'PUT') {
         const url = request.url
         const id = parseInt(url.split('/')[2]);
@@ -88,7 +88,7 @@ const server = http.createServer((request, response)=>{
             })
         }
 
-    // Write the DELETE endpoint
+    //Write the DELETE endpoint
     }else {
         response.writeHead(200, { 'content-type': 'text/html' })
         response.end('<h1>Welcome to The Curve Africa Backend Class</h1>')
