@@ -63,7 +63,36 @@ const server = http.createServer((request, response)=>{
         const url = request.url
         const id = parseInt(url.split('/')[2]);
         const studentIndex = studentDB.findIndex((e) => e.id === id);
-        console.log(studentIndex)
+            if (studentIndex === -1) {
+                response.writeHead(404, {'Content-Type': 'application/json'})
+                response.end(JSON.stringify({
+                    message: `Student with ID: ${id} not found`
+                }))
+
+            } else {   
+                let body = '';
+                request.on('data', (chunk) => {
+                    body += chunk
+                });
+
+                request.on('end', () => {
+                    const data = JSON.parse(body)
+                    studentDB[studentIndex] = { ...studentDB[studentIndex], ...data }
+                    writeData(studentDB)
+                    response.writeHead(200, {'Content-Type': 'application/json'})
+                    response.end(JSON.stringify({
+                        message: 'Student Updated Successfully',
+                        data: studentDB[studentIndex]
+                    })) 
+                })
+            }
+
+    //Write the DELETE endpoint
+    }else if (request.url.startsWith('/student') && request.method === 'PUT') {
+        const url = request.url
+        const id = parseInt(url.split('/')[2]);
+        const studentIndex = studentDB.findIndex((e) => e.id === id);
+    
         if (studentIndex === -1) {
             response.writeHead(404, {'Content-Type': 'application/json'})
             response.end(JSON.stringify({
@@ -87,8 +116,6 @@ const server = http.createServer((request, response)=>{
                 })) 
             })
         }
-
-    //Write the DELETE endpoint
     }else {
         response.writeHead(200, { 'content-type': 'text/html' })
         response.end('<h1>Welcome to The Curve Africa Backend Class</h1>')
