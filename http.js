@@ -87,8 +87,8 @@ const server = http.createServer((request, response)=>{
                 })
             }
 
-    //Write the DELETE endpoint
-    }else if (request.url.startsWith('/student') && request.method === 'PUT') {
+    //Delete Student
+    }else if (request.url.startsWith('/student') && request.method === 'DELETE') {
         const url = request.url
         const id = parseInt(url.split('/')[2]);
         const studentIndex = studentDB.findIndex((e) => e.id === id);
@@ -111,7 +111,7 @@ const server = http.createServer((request, response)=>{
                 writeData(studentDB)
                 response.writeHead(200, {'Content-Type': 'application/json'})
                 response.end(JSON.stringify({
-                    message: 'Student Updated Successfully',
+                    message: 'Student Deleted Successfully',
                     data: studentDB[studentIndex]
                 })) 
             })
